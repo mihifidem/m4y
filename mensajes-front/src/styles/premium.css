@@ -1,0 +1,396 @@
+/* ============================================================
+   🌸 NTSF Premium UI — Glass + Neon + Soft Glow
+   Reutilizable en todas las pantallas
+   ============================================================ */
+/* ============================================================
+   🔝 PREMIUM HEADER LOGO
+============================================================ */
+.header-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 999;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  transition: 0.25s ease;
+}
+
+.header-logo:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(225, 29, 72, 0.45);
+}
+
+.header-logo-img {
+  width: 38px;
+  height: 38px;
+}
+
+.header-logo-text {
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #e11d48, #db2777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Fuente suave premium */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fdf2f8;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   Glass Card
+============================================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 26px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+/* Title */
+.title-premium {
+  font-size: 2.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #e11d48, #db2777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   Inputs
+============================================================ */
+.input-premium {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.55);
+  transition: all 0.25s ease-in-out;
+}
+
+.input-premium:focus {
+  border-color: #e11d48;
+  outline: none;
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.5);
+}
+
+/* ============================================================
+   Buttons
+============================================================ */
+.btn-premium {
+  background: linear-gradient(90deg, #e11d48, #db2777);
+  padding: 0.9rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: 0.25s;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.4);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(225, 29, 72, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.5);
+  color: #444;
+  border-radius: 14px;
+  padding: 0.9rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Neon button */
+.btn-neon {
+  background: transparent;
+  border: 2px solid #e11d48;
+  color: #e11d48;
+  font-weight: 600;
+  padding: 0.9rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 6px rgba(225, 29, 72, 0.4);
+}
+
+.btn-neon:hover {
+  background: #e11d48;
+  color: white;
+  box-shadow: 0 0 14px rgba(225, 29, 72, 0.8);
+}
+
+/* ============================================================
+   Animaciones
+============================================================ */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floating-bg {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-22px); }
+  100% { transform: translateY(0); }
+}
+
+/* ============================================================
+   Background effects
+============================================================ */
+.premium-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, #fbcfe8, transparent 60%),
+              radial-gradient(circle at 80% 40%, #f9a8d4, transparent 60%),
+              radial-gradient(circle at 50% 80%, #fda4af, transparent 60%);
+  filter: blur(25px);
+  animation: floating-bg 12s infinite ease-in-out;
+  z-index: -5;
+}
+
+/* Premium container */
+.center-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* ============================================================
+   🌸 LANDING PREMIUM
+============================================================ */
+
+.landing-container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.landing-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/f34.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  filter: blur(6px);
+  z-index: -1;
+  animation: bgMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+
+.landing-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  border-radius: 32px;
+  padding: 40px;
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 8px 32px rgba(225,29,72,0.25);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-title {
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: #e11d48;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.landing-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 28px;
+}
+
+.landing-section {
+  margin-bottom: 28px;
+}
+
+.landing-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #e11d48;
+  font-size: 1.1rem;
+}
+
+.input-premium {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #fbcfe8;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  text-align: center;
+  transition: 0.25s ease;
+  letter-spacing: 2px;
+}
+
+.input-premium:focus {
+  border-color: #e11d48;
+  box-shadow: 0 0 12px rgba(225,29,72,0.45);
+  outline: none;
+}
+
+.input-error {
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: #dc2626;
+}
+
+.btn-premium {
+  width: 100%;
+  background: linear-gradient(90deg, #e11d48, #db2777);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 18px rgba(225,29,72,0.35);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(225,29,72,0.5);
+}
+
+.btn-premium-secondary {
+  width: 100%;
+  background: white;
+  border: 2px solid #e11d48;
+  color: #e11d48;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.25s ease;
+}
+
+.btn-premium-secondary:hover {
+  background: #ffe4e6;
+  transform: translateY(-2px);
+}
+
+.landing-nfc {
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+/* ============================================================
+   📌 INPUT PARA VER MENSAJE EN ESQUINA SUPERIOR DERECHA
+============================================================ */
+
+.floating-view-box {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+}
+
+.floating-view-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.6);
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  box-shadow: 0 4px 16px rgba(225,29,72,0.2);
+}
+
+.floating-input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #fbcfe8;
+  background: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+  width: 150px;
+}
+
+.floating-input:focus {
+  border-color: #e11d48;
+  box-shadow: 0 0 8px rgba(225,29,72,0.4);
+}
+
+.floating-btn {
+  padding: 8px 16px;
+  background: #e11d48;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.floating-btn:hover {
+  background: #db2777;
+}
+
+.floating-error {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #dc2626;
+  text-align: right;
+}

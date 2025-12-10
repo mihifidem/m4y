@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🎀 Estilos globales románticos */
+body {
+  @apply bg-[rgb(247,221,226)] text-gray-700;
+  background-image: radial-gradient(circle at top left, #f7dde2, #ffffff);
+  font-family: 'Inter', sans-serif;
+}
+
+.card-romantic {
+  @apply bg-white rounded-2xl shadow-xl p-8 border border-pink-200;
+}
+
+.btn-romantic {
+  @apply px-4 py-2 rounded-xl text-white font-semibold shadow-md 
+         bg-[#E86B87] hover:bg-[#d15873] duration-200;
+}
+
+.input-romantic {
+  @apply w-full border border-pink-200 rounded-xl p-3 bg-white 
+         focus:outline-none focus:ring-2 focus:ring-[#E86B87];
+}
+
+.link-romantic {
+  @apply text-[#E86B87] hover:text-[#d15873] font-semibold;
+}

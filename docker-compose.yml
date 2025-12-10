@@ -1,0 +1,14 @@
+services:
+  backend:
+    build: ./mensajes-backend
+    container_name: django_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mensajes-backend:/app
+
+  frontend:
+    build: ./mensajes-front
+    container_name: react_frontend
+    ports:
+      - "5173:80"
