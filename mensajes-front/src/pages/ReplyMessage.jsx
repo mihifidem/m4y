@@ -170,7 +170,7 @@ export default function ReplyMessage() {
     <div className="relative min-h-screen bg-rose-50 flex justify-center p-6">
 
       {/* Fondo floral */}
-      <div className="absolute inset-0 opacity-20 bg-[url('https://i.imgur.com/3y9xQw8.png')] bg-cover"></div>
+      <div className="absolute inset-0 opacity-30 bg-cover bg-center z-0" style={{ backgroundImage: "url('/f1.jpg')" }}></div>
 
       <div className="relative bg-white p-8 rounded-3xl max-w-3xl w-full shadow-xl animate-fadeIn">
 
@@ -181,7 +181,10 @@ export default function ReplyMessage() {
           </div>
         ) : alreadyReplied ? (
           // MENSAJE DE CONFIRMACIÓN - YA SE ENVIÓ RESPUESTA
-          <div className="text-center py-8">
+          <div className="relative text-center py-8 min-h-[60vh] flex items-center justify-center overflow-hidden">
+            {/* Fondo decorativo */}
+            <div className="absolute inset-0 opacity-30 bg-cover bg-center z-0" style={{ backgroundImage: "url('/f1.jpg')" }}></div>
+            <div className="relative z-10 w-full flex flex-col items-center justify-center">
             <div className="mb-6">
               <svg className="w-24 h-24 mx-auto text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -200,6 +203,7 @@ export default function ReplyMessage() {
             >
               Volver al inicio
             </button>
+            </div>
           </div>
         ) : (
           // FORMULARIO NORMAL DE RESPUESTA

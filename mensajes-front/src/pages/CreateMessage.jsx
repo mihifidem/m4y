@@ -875,7 +875,7 @@ export default function CreateMessage() {
         </div>
       )}
 
-      <div className={`${theme.card} shadow-2xl rounded-2xl sm:rounded-3xl w-full max-w-3xl p-4 sm:p-6 md:p-8 relative z-10 animate-fade-in-up border border-gray-100`}>
+      <div className={`${theme.card} shadow-2xl rounded-2xl sm:rounded-3xl w-full max-w-3xl p-4 sm:p-6 md:p-8 relative z-10 animate-fade-in-up border border-gray-100 mx-2 sm:mx-0`}>
 
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
           <h1 className={`text-4xl font-bold bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient`}>
@@ -893,14 +893,11 @@ export default function CreateMessage() {
                 <span className="text-2xl">🎫</span>
                 Código del mensaje
               </label>
-              <div className="mt-2 flex items-center gap-2 justify-center">
-                <input value={codePart1} readOnly className="w-24 p-3 border-2 border-gray-300 rounded-xl text-center uppercase bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
-                <span className="text-gray-400 text-xl font-bold">-</span>
-                <input value={codePart2} readOnly className="w-16 p-3 border-2 border-gray-300 rounded-xl text-center bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
-                <span className="text-gray-400 text-xl font-bold">-</span>
-                <input value={codePart3} readOnly className="w-16 p-3 border-2 border-gray-300 rounded-xl text-center bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
-                <span className="text-gray-400 text-xl font-bold">-</span>
-                <input value={codePart4} readOnly className="w-20 p-3 border-2 border-gray-300 rounded-xl text-center uppercase bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
+              <div className="mt-2 grid grid-cols-4 gap-2 sm:gap-2 justify-center items-center">
+                <input value={codePart1} readOnly className="w-full p-3 border-2 border-gray-300 rounded-xl text-center uppercase bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
+                <input value={codePart2} readOnly className="w-full p-3 border-2 border-gray-300 rounded-xl text-center bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
+                <input value={codePart3} readOnly className="w-full p-3 border-2 border-gray-300 rounded-xl text-center bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
+                <input value={codePart4} readOnly className="w-full p-3 border-2 border-gray-300 rounded-xl text-center uppercase bg-white cursor-not-allowed font-bold text-lg shadow-sm" />
               </div>
             </div>
 

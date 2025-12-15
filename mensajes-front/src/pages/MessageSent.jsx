@@ -14,8 +14,15 @@ export default function MessageSent() {
   };
 
   return (
-    <div className="min-h-screen bg-rose-50 flex items-center justify-center p-6">
-      <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center border border-rose-200 animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-rose-50 relative overflow-hidden">
+      {/* Fondo decorativo */}
+      <div
+        className="absolute inset-0 opacity-30 bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('/fd01.jpg')" }}
+      ></div>
+      {/* Contenido */}
+      <div className="relative z-10 w-full flex items-center justify-center">
+        <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full text-center border border-rose-200 animate-fade-in">
 
         <h1 className="text-3xl font-bold text-rose-600 mb-4">
           🎉 ¡Mensaje creado!
@@ -50,6 +57,7 @@ export default function MessageSent() {
           >
             {copied ? "✓ Enlace copiado" : "📋 Copiar enlace"}
           </button>
+        </div>
         </div>
       </div>
 

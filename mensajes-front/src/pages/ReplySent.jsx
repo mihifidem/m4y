@@ -17,7 +17,7 @@ export default function ReplySent() {
     <div className="relative min-h-screen flex items-center justify-center bg-rose-50 overflow-hidden">
 
       {/* Fondo floral */}
-      <div className="absolute inset-0 bg-[url('https://i.imgur.com/3y9xQw8.png')] opacity-20 bg-cover animate-pulse"></div>
+      <div className="absolute inset-0 opacity-30 bg-cover bg-center z-0" style={{ backgroundImage: "url('/f1.jpg')" }}></div>
 
       {/* Contenido */}
       <div className="relative bg-white shadow-2xl rounded-3xl p-10 max-w-lg text-center animate-fadeIn">

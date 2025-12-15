@@ -87,7 +87,7 @@ export default function ViewMessageForm() {
     const finalCode = composed.toUpperCase();
 
     if (!regex.test(finalCode)) {
-      setError("Formato inválido. Debe ser: NTSF-001-001-ABC");
+      setError("Formato inválido. Debe ser: ABCD-001-001-ABC");
       return;
     }
 
@@ -123,7 +123,7 @@ export default function ViewMessageForm() {
         </div>
       )}
 
-      <div className={`${theme.card} shadow-2xl rounded-3xl w-full max-w-2xl p-10 relative z-10 animate-fade-in-up border border-gray-100`}>
+      <div className={`${theme.card} shadow-2xl rounded-3xl w-full max-w-2xl p-10 relative z-10 animate-fade-in-up border border-gray-100 mx-2 sm:mx-0`}>
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
             🔍 Ver Mensaje
@@ -142,7 +142,7 @@ export default function ViewMessageForm() {
               Código del mensaje
             </label>
             <div className="flex items-center gap-1 sm:gap-2 md:gap-3 justify-center">
-              <input id="vp1" value={p1} onChange={handleP1Change} onPaste={handlePaste} maxLength={4} className="w-16 sm:w-20 md:w-24 lg:w-28 p-3 sm:p-4 border-2 border-gray-300 rounded-xl text-center uppercase font-bold text-lg sm:text-xl shadow-md focus:border-rose-500 focus:ring-4 focus:ring-rose-200 transition-all duration-300 hover:scale-105" placeholder="NTSF" />
+              <input id="vp1" value={p1} onChange={handleP1Change} onPaste={handlePaste} maxLength={4} className="w-16 sm:w-20 md:w-24 lg:w-28 p-3 sm:p-4 border-2 border-gray-300 rounded-xl text-center uppercase font-bold text-lg sm:text-xl shadow-md focus:border-rose-500 focus:ring-4 focus:ring-rose-200 transition-all duration-300 hover:scale-105" placeholder="ABCD" />
               <span className="text-gray-400 text-xl sm:text-2xl font-bold">-</span>
               <input id="vp2" value={p2} onChange={handleP2Change} maxLength={3} className="w-14 sm:w-16 md:w-20 lg:w-24 p-3 sm:p-4 border-2 border-gray-300 rounded-xl text-center font-bold text-lg sm:text-xl shadow-md focus:border-rose-500 focus:ring-4 focus:ring-rose-200 transition-all duration-300 hover:scale-105" placeholder="001" />
               <span className="text-gray-400 text-xl sm:text-2xl font-bold">-</span>
@@ -150,7 +150,7 @@ export default function ViewMessageForm() {
               <span className="text-gray-400 text-xl sm:text-2xl font-bold">-</span>
               <input id="vp4" value={p4} onChange={handleP4Change} maxLength={3} className="w-16 sm:w-20 md:w-24 lg:w-28 p-3 sm:p-4 border-2 border-gray-300 rounded-xl text-center uppercase font-bold text-lg sm:text-xl shadow-md focus:border-rose-500 focus:ring-4 focus:ring-rose-200 transition-all duration-300 hover:scale-105" placeholder="ABC" />
             </div>
-            <p className="mt-4 text-sm text-gray-500 text-center">📝 Formato: NTSF-001-001-ABC (puedes pegar el código completo)</p>
+            <p className="mt-4 text-sm text-gray-500 text-center">📝 Formato: ABCD-001-001-ABC (puedes pegar el código completo)</p>
           </div>
 
           {error && (
