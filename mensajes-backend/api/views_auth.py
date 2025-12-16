@@ -96,6 +96,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             "username": user.username,
             "email": user.email,
             "first_name": user.first_name,
+            "is_staff": user.is_staff,
+            "is_superuser": user.is_superuser,
         })
 
         print(f"🟢 Login correcto para {user.username}")
@@ -107,6 +109,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["username"] = user.username
         token["email"] = user.email
         token["first_name"] = user.first_name
+        token["is_staff"] = user.is_staff
+        token["is_superuser"] = user.is_superuser
         return token
 
 

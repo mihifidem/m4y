@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
 import NotFound from "./pages/NotFound";
+import AdminCodes from "./pages/AdminCodes";
 import PrivateRoute from "./auth/PrivateRoute";
 import CreateMessage from "./pages/CreateMessage";
 import ViewMessage from "./pages/ViewMessage";
@@ -65,6 +66,16 @@ function App() {
         <Route path="/reply-sent/:code" element={<ReplySent />} />
         <Route path="/error" element={<ErrorPage />} />
           <Route path="/expired/:code" element={<ExpiredMessage />} />
+
+        {/* CRUD de códigos para admin */}
+        <Route
+          path="/admin-codes"
+          element={
+            <PrivateRoute>
+              <AdminCodes />
+            </PrivateRoute>
+          }
+        />
 
 {/* navigate("/error", { state: { msg: "El mensaje ha expirado o no existe." } }); */}
 

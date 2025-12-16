@@ -1,3 +1,8 @@
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+from .views import CodeAdminViewSet
+router.register(r'codes', CodeAdminViewSet, basename='code-admin')
 from django.urls import path
 from .views import (
     check_code,
@@ -31,7 +36,8 @@ urlpatterns = [
     path("messages/by-user/", messages_by_user, name="messages_by_user"),
     path("ai/suggest/", ai_suggest, name="ai_suggest"),
     path("proveedor/<str:prefix>/", proveedor_by_prefix, name="proveedor_by_prefix"),
-    path("user/proveedor/", get_user_proveedor, name="user_proveedor"),
-
-
+    path("user/proveedor/", get_user_proveedor, name="get_user_proveedor"),
 ]
+
+# Agregar rutas del router (codes CRUD admin)
+urlpatterns += router.urls

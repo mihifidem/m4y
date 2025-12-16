@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import ConfirmModal from "../components/ConfirmModal";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 import.meta.env
@@ -9,6 +10,9 @@ export default function ViewMessage() {
   const navigate = useNavigate();
 
   const [message, setMessage] = useState(null);
+  const [showNotifyModal, setShowNotifyModal] = useState(false);
+  const [notifyLoading, setNotifyLoading] = useState(false);
+  const [notifySent, setNotifySent] = useState(false);
   const [error, setError] = useState("");
   const [expired, setExpired] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -60,6 +64,11 @@ export default function ViewMessage() {
           navigate(`/expired/${code}`);
           return;
         }
+
+        // Mostrar modal solo si es la primera visualización
+        if (res.data.views_count === 1 && res.data.notify_on_read && res.data.buyer_email) {
+          setShowNotifyModal(true);
+        }
       } catch (err) {
         console.error(err);
         setError("No se encontró el mensaje o hubo un error.");
@@ -104,6 +113,28 @@ export default function ViewMessage() {
 
   return (
     <div className="relative min-h-screen p-3 sm:p-4 md:p-6 flex justify-center bg-rose-50 overflow-hidden">
+
+      {/* Modal para notificar al comprador */}
+      <ConfirmModal
+        isOpen={showNotifyModal}
+        title="¿Avisar al comprador?"
+        message="¿Quieres enviar un email al comprador para avisarle que has abierto el mensaje?"
+        confirmText="Sí, avisar"
+        cancelText="No, gracias"
+        loading={notifyLoading}
+        onCancel={() => setShowNotifyModal(false)}
+        onConfirm={async () => {
+          setNotifyLoading(true);
+          try {
+            await api.post(`/message/${code}/viewed/`, {});
+            setNotifySent(true);
+            setShowNotifyModal(false);
+          } catch (e) {
+            alert("Error enviando el aviso");
+          }
+          setNotifyLoading(false);
+        }}
+      />
 
       {/* 🌸 Fondo floral animado */}
       <div
@@ -179,6 +210,9 @@ export default function ViewMessage() {
               <p className="mb-1"><strong>Creado:</strong> {new Date(message.created_at).toLocaleString()}</p>
               <p className="mb-1"><strong>Expira:</strong> {message.expires_at ? new Date(message.expires_at).toLocaleString() : "Sin expiración"}</p>
               <p><strong>Vistas:</strong> {message.views_count}/{message.max_views}</p>
+              {notifySent && (
+                <div className="text-green-600 font-semibold mt-2">Se ha avisado al comprador por email.</div>
+              )}
             </div>
 
             {/* RESPUESTAS */}

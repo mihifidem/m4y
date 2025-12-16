@@ -12,7 +12,7 @@ class CodeAdmin(admin.ModelAdmin):
 
     def message_link(self, obj):
         if hasattr(obj, "message"):
-            return format_html(f"<a href='/admin/api/message/{obj.message.id}/change/'>Ver mensaje</a>")
+            return format_html("<a href='/admin/api/message/{}/change/'>Ver mensaje</a>", obj.message.id)
         return "-"
     message_link.short_description = "Mensaje asociado"
 

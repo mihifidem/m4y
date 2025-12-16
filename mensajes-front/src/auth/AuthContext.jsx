@@ -22,8 +22,17 @@ export function AuthProvider({ children }) {
     // Guardar tokens PRIMERO para que el interceptor los use
     localStorage.setItem("access", res.data.access);
     localStorage.setItem("refresh", res.data.refresh);
-    localStorage.setItem("user", JSON.stringify({ email }));
-    setUser({ email });
+    // Guardar info de usuario extendida
+    const userData = {
+      email,
+      is_staff: res.data.is_staff,
+      is_superuser: res.data.is_superuser,
+      user_id: res.data.user_id,
+      username: res.data.username,
+      first_name: res.data.first_name,
+    };
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
 
     // Cargar información del proveedor automáticamente (ahora con token disponible)
     try {

@@ -1,3 +1,26 @@
+from rest_framework import viewsets, permissions
+from .models import Code, Message, Reply, Proveedor
+from .serializers import CodeSerializer, MessageSerializer, ReplySerializer, ProveedorSerializer
+
+# Permiso solo para admin
+class IsAdminUser(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_staff
+
+# ViewSet CRUD para Code
+class CodeAdminViewSet(viewsets.ModelViewSet):
+    serializer_class = CodeSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+
+    def get_queryset(self):
+        queryset = Code.objects.all().order_by('-created_at')
+        search = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(
+                models.Q(code__icontains=search) |
+                models.Q(message__buyer_email__icontains=search)
+            )
+        return queryset
 from datetime import timedelta
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
@@ -153,9 +176,17 @@ class ReplyCreateView(APIView):
         # ✅ Notificar al comprador (si tiene email)
         if message.buyer_email:
             from django.core.mail import send_mail
+            # Construir link al mensaje y respuesta
+            frontend_url = "https://tusitio.com/view/"  # Cambia esto por tu dominio real
+            link = f"{frontend_url}{message.code.code}"
+            email_body = (
+                f"El destinatario ha respondido al mensaje con código {message.code.code}.\n\n"
+                f"Puedes ver la respuesta aquí: {link}\n\n"
+                f"Texto de la respuesta:\n{reply.text}"
+            )
             send_mail(
                 subject="📩 Has recibido una respuesta a tu mensaje",
-                message=f"El destinatario ha respondido al mensaje con código {message.code.code}.",
+                message=email_body,
                 from_email="no-reply@notodosonflores.com",
                 recipient_list=[message.buyer_email],
                 fail_silently=True,

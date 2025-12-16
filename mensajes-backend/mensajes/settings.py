@@ -137,19 +137,19 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 # Configuración básica de correo (para desarrollo)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'notodosonflores@gmail.com'  # tu correo
-EMAIL_HOST_PASSWORD = 'mmqh axek dlap vion'  # tu contraseña o token de aplicación
+EMAIL_HOST_PASSWORD = 'wvcs oakt gicd ahuk'  # tu contraseña o token de aplicación
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",

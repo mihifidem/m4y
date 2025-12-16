@@ -92,6 +92,19 @@ export default function Navbar() {
           >
             Ver
           </Link>
+          {/* Enlace solo para admin */}
+          {user && user.is_staff && (
+            <Link
+              to="/admin-codes"
+              className={`px-2 sm:px-3 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                isActive("/admin-codes")
+                  ? "bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-md"
+                  : "text-gray-700 hover:bg-white hover:text-yellow-600"
+              }`}
+            >
+              Admin Códigos
+            </Link>
+          )}
         </div>
 
         {/* Botón de acceso para comercios / Usuario logueado */}
