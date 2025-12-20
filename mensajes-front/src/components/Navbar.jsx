@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 flex items-center justify-between">
         {/* Logo con animación */}
         <Link 
-          to="/" 
+          to="view-message/" 
           className="group flex items-center gap-2 sm:gap-3 font-bold text-lg sm:text-xl md:text-2xl hover:scale-110 transition-all duration-300"
         >
           <span className="text-2xl sm:text-3xl group-hover:rotate-12 transition-transform duration-300">🎁</span>
@@ -54,7 +54,7 @@ export default function Navbar() {
             {/* Partículas de estrellas y corazones que explotan */}
             
             
-            <span className="bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient group-hover:opacity-0 transition-opacity duration-300">Mensaje</span>
+            <span className="bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient group-hover:opacity-0 transition-opacity duration-300">Un Mensaje</span>
             <span className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-gradient">para Ti</span>
           </span>
         </Link>
@@ -62,15 +62,14 @@ export default function Navbar() {
         {/* Enlaces principales */}
         <div className="flex items-center gap-1 sm:gap-2">
           <Link 
-            to="/" 
-            onClick={() => window.location.href = '/'}
+            to="/home-info" 
             className={`px-2 sm:px-3 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-              isActive("/") && location.pathname === "/"
+              isActive("/home-info")
                 ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md"
                 : "text-gray-700 hover:bg-white hover:text-rose-600"
             }`}
           >
-            Home
+            Inicio
           </Link>
           <Link 
             to="/" 
@@ -80,7 +79,7 @@ export default function Navbar() {
                 : "text-gray-700 hover:bg-white hover:text-rose-600"
             }`}
           >
-            Crear
+            Crear Mensaje
           </Link>
           <Link 
             to="/view-message" 
@@ -90,7 +89,7 @@ export default function Navbar() {
                 : "text-gray-700 hover:bg-white hover:text-rose-600"
             }`}
           >
-            Ver
+            Ver Mensaje
           </Link>
           {/* Enlace solo para admin */}
           {user && user.is_staff && (

@@ -15,8 +15,9 @@ from .views import (
     messages_by_user,
     UpdateMessageView,
     DeleteMessageView,
+    codes_by_user,  # <--- Asegura que esté importado aquí
 )
-from .views_auth import register_user
+from .views_auth import register_user, CustomTokenObtainPairView
 from .views_ai import ai_suggest
 from .views import proveedor_by_prefix
 from .views_proveedor import get_user_proveedor
@@ -37,6 +38,8 @@ urlpatterns = [
     path("ai/suggest/", ai_suggest, name="ai_suggest"),
     path("proveedor/<str:prefix>/", proveedor_by_prefix, name="proveedor_by_prefix"),
     path("user/proveedor/", get_user_proveedor, name="get_user_proveedor"),
+    path("codes/by-user/", codes_by_user, name="codes_by_user"),
+    path("login/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
 ]
 
 # Agregar rutas del router (codes CRUD admin)

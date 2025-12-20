@@ -1,10 +1,38 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
 
 export default function Dashboard() {
   const { user, proveedor, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // Estado para códigos y stats
+  const [codes, setCodes] = useState([]);
+  const [stats, setStats] = useState({ activated: {}, inactive: {} });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchCodes() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await api.get("/codes/by-user/");
+        setCodes(res.data.codes || []);
+        setStats(res.data.stats || { activated: {}, inactive: {} });
+      } catch (err) {
+        setError("No se pudieron cargar los códigos");
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (proveedor) fetchCodes();
+  }, [proveedor]);
+
+  // Separar códigos activados y sin activar
+  const codesActivated = codes.filter((c) => c.activated);
+  const codesInactive = codes.filter((c) => !c.activated);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 py-8 px-4">
@@ -29,7 +57,7 @@ export default function Dashboard() {
         {proveedor ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Card Principal */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
+            <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,6 +139,86 @@ export default function Dashboard() {
                 </svg>
                 Editar Información
               </button>
+            </div>
+
+            {/* Códigos y estadísticas */}
+            <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+              <h2 className="text-xl font-bold text-gray-800 mb-4">Códigos y Estadísticas</h2>
+              {loading ? (
+                <p className="text-gray-500">Cargando códigos...</p>
+              ) : error ? (
+                <p className="text-red-500">{error}</p>
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <h3 className="font-semibold text-purple-700 mb-2">Códigos sin activar ({codesInactive.length})</h3>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full text-sm">
+                        <thead>
+                          <tr className="bg-purple-50">
+                            <th className="px-2 py-1 text-left">Código</th>
+                            <th className="px-2 py-1 text-left">Fecha creación</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {codesInactive.map((c) => (
+                            <tr key={c.code} className="border-b last:border-0">
+                              <td className="px-2 py-1 font-mono">{c.code}</td>
+                              <td className="px-2 py-1">{new Date(c.created_at).toLocaleDateString()}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="mb-6">
+                    <h3 className="font-semibold text-green-700 mb-2">Códigos activados ({codesActivated.length})</h3>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full text-sm">
+                        <thead>
+                          <tr className="bg-green-50">
+                            <th className="px-2 py-1 text-left">Código</th>
+                            <th className="px-2 py-1 text-left">Título</th>
+                            <th className="px-2 py-1 text-left">Fecha activación</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {codesActivated.map((c) => (
+                            <tr key={c.code} className="border-b last:border-0">
+                              <td className="px-2 py-1 font-mono">{c.code}</td>
+                              <td className="px-2 py-1">{c.title || "(Sin título)"}</td>
+                              <td className="px-2 py-1">{c.message_created_at ? new Date(c.message_created_at).toLocaleDateString() : "-"}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-indigo-700 mb-2">Estadísticas por mes</h3>
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full text-sm">
+                        <thead>
+                          <tr className="bg-indigo-50">
+                            <th className="px-2 py-1 text-left">Mes</th>
+                            <th className="px-2 py-1 text-left">Activados</th>
+                            <th className="px-2 py-1 text-left">Sin activar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {Object.keys({ ...stats.activated, ...stats.inactive }).sort().map((month) => (
+                            <tr key={month} className="border-b last:border-0">
+                              <td className="px-2 py-1">{month}</td>
+                              <td className="px-2 py-1 text-green-700">{stats.activated[month] || 0}</td>
+                              <td className="px-2 py-1 text-purple-700">{stats.inactive[month] || 0}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Redes Sociales */}

@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions
 from .models import Code, Message, Reply, Proveedor
 from .serializers import CodeSerializer, MessageSerializer, ReplySerializer, ProveedorSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # Permiso solo para admin
 class IsAdminUser(permissions.BasePermission):
@@ -29,12 +30,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Code, Message, Reply, Proveedor
 from .serializers import CodeSerializer, MessageSerializer, ReplySerializer, ProveedorSerializer
 from .utils.notification import notify_message_read
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from django.contrib.auth.models import User
+from collections import Counter
+from django.db.models import Q
+from datetime import datetime
 
 
 @api_view(["GET"])
@@ -177,7 +180,7 @@ class ReplyCreateView(APIView):
         if message.buyer_email:
             from django.core.mail import send_mail
             # Construir link al mensaje y respuesta
-            frontend_url = "https://tusitio.com/view/"  # Cambia esto por tu dominio real
+            frontend_url = "https://www.mensajeparati.com/view/"  # Cambia esto por tu dominio real
             link = f"{frontend_url}{message.code.code}"
             email_body = (
                 f"El destinatario ha respondido al mensaje con código {message.code.code}.\n\n"
@@ -435,3 +438,64 @@ class DeleteMessageView(APIView):
             return Response({
                 "error": "Mensaje no encontrado"
             }, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def codes_by_user(request):
+    """
+    Devuelve todos los códigos del proveedor asociado al usuario autenticado,
+    indicando si están activados (usados) o no, y estadísticas por mes.
+    """
+    user = request.user
+    # Buscar proveedor asociado
+    try:
+        proveedor = Proveedor.objects.get(user=user)
+    except Proveedor.DoesNotExist:
+        return Response({"error": "No tienes proveedor asociado."}, status=403)
+
+    # Filtrar códigos por prefijo del proveedor
+    prefix = proveedor.prefix
+    codes = Code.objects.filter(code__startswith=prefix).order_by("-created_at")
+
+    # Preparar listas
+    codes_data = []
+    stats_activated = Counter()
+    stats_inactive = Counter()
+
+    for code in codes:
+        # Buscar mensaje asociado
+        try:
+            message = Message.objects.get(code=code)
+            activated = True
+            created_at = message.created_at
+        except Message.DoesNotExist:
+            message = None
+            activated = False
+            created_at = code.created_at
+
+        codes_data.append({
+            "code": code.code,
+            "is_active": code.is_active,
+            "activated": activated,
+            "created_at": code.created_at,
+            "message_created_at": message.created_at if message else None,
+            "message_id": message.id if message else None,
+            "title": message.title if message else None,
+        })
+
+        # Stats por mes
+        month_key = created_at.strftime("%Y-%m")
+        if activated:
+            stats_activated[month_key] += 1
+        else:
+            stats_inactive[month_key] += 1
+
+    # Responder
+    return Response({
+        "codes": codes_data,
+        "stats": {
+            "activated": stats_activated,
+            "inactive": stats_inactive,
+        }
+    })

@@ -67,7 +67,13 @@ export default function Account() {
     setSaving(true);
     setMessage({ type: "", text: "" });
     try {
-      const response = await api.put("/user/proveedor/", formData);
+      // Añadir name y prefix si existen en proveedor
+      const dataToSend = {
+        ...formData,
+        name: proveedor?.name || "",
+        prefix: proveedor?.prefix || ""
+      };
+      const response = await api.put("/user/proveedor/", dataToSend);
       if (response.data.success) {
         setProveedor(response.data.proveedor);
         setEditing(false);
@@ -76,7 +82,13 @@ export default function Account() {
       }
     } catch (err) {
       console.error("Error actualizando información:", err);
-      setMessage({ type: "error", text: "Error al actualizar la información" });
+      let errorMsg = "Error al actualizar la información";
+      if (err.response && err.response.data && err.response.data.errors) {
+        errorMsg += ": " + JSON.stringify(err.response.data.errors);
+      } else if (err.response && err.response.data && err.response.data.error) {
+        errorMsg += ": " + err.response.data.error;
+      }
+      setMessage({ type: "error", text: errorMsg });
     } finally {
       setSaving(false);
     }

@@ -17,6 +17,21 @@ export default function CreateMessage() {
   const [showAlert, setShowAlert] = useState({ isOpen: false, title: "", message: "", type: "info" });
   const [toast, setToast] = useState({ isOpen: false, message: "", type: "success" });
 
+  // Cargar datos previos automáticamente al entrar en modo edición
+  useEffect(() => {
+    if (isEditMode && existingMessage) {
+      setText(existingMessage.text || "");
+      setBuyerEmail(existingMessage.buyer_email || "");
+      if (existingMessage.video) {
+        setVideoPreview(`${import.meta.env.VITE_API_URL}${existingMessage.video}`);
+      }
+      if (existingMessage.audio) {
+        setAudioPreview(`${import.meta.env.VITE_API_URL}${existingMessage.audio}`);
+      }
+    }
+  }, [isEditMode, existingMessage]);
+
+
   // =========================================================
   // CODE INPUT (4 PARTS)
   // =========================================================
@@ -997,7 +1012,7 @@ export default function CreateMessage() {
             </div>
 
             {/* Botones de acción */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               <button
                 onClick={() => {
                   // Cargar datos existentes para editar
@@ -1016,7 +1031,7 @@ export default function CreateMessage() {
                 <span className="text-2xl">✏️</span>
                 Editar mensaje
               </button>
-              
+
               <button
                 onClick={handleDeleteMessage}
                 className="bg-gradient-to-r from-red-500 via-rose-500 to-pink-500 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
@@ -1024,15 +1039,15 @@ export default function CreateMessage() {
                 <span className="text-2xl">🗑️</span>
                 Borrar mensaje
               </button>
-            </div>
 
-            {/* Botón cancelar */}
-            <button
-              onClick={() => navigate("/")}
-              className="w-full py-3 rounded-xl text-lg font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
-            >
-              ← Volver al inicio
-            </button>
+              <button
+                onClick={() => navigate("/")}
+                className="bg-gradient-to-r from-gray-400 to-gray-500 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+              >
+                <span className="text-2xl">❌</span>
+                Cancelar
+              </button>
+            </div>
           </div>
         )}
 

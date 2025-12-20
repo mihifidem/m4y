@@ -45,6 +45,7 @@ export default function MessageSent() {
           {/* Ver mensaje */}
           <Link
             to={`/view/${code}`}
+            state={{ justCreated: true }}
             className="block w-full bg-rose-500 text-white py-3 rounded-xl shadow hover:bg-rose-600 transition"
           >
             🌸 Ver mensaje

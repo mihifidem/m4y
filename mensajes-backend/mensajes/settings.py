@@ -81,15 +81,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mensajes.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database
+# Alterna entre SQLite y PostgreSQL usando la variable de entorno DJANGO_DB_ENGINE
+DB_ENGINE = os.getenv('DJANGO_DB_ENGINE', 'sqlite')
+if DB_ENGINE == 'postgres':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('POSTGRES_DB', 'mensajesdb'),
+            'USER': os.getenv('POSTGRES_USER', 'mensajesuser'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'mensajespass'),
+            'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+            'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

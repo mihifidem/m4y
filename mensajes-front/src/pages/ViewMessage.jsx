@@ -1,6 +1,7 @@
+
 import { useEffect, useState, useRef } from "react";
 import ConfirmModal from "../components/ConfirmModal";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../api/axios";
 import.meta.env
 
@@ -8,6 +9,7 @@ import.meta.env
 export default function ViewMessage() {
   const { code } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [message, setMessage] = useState(null);
   const [showNotifyModal, setShowNotifyModal] = useState(false);
@@ -216,12 +218,15 @@ export default function ViewMessage() {
             </div>
 
             {/* RESPUESTAS */}
-            <button
-              onClick={() => navigate(`/reply/${code}`)}
-              className="bg-rose-600 text-white w-full p-2.5 sm:p-3 md:p-3.5 rounded-lg sm:rounded-xl text-sm sm:text-base md:text-lg font-semibold shadow hover:bg-rose-700 transition-all"
-            >
-              💬 Responder mensaje
-            </button>
+            {/* Ocultar botón de reply si viene de creación de mensaje */}
+            {!(location.state && location.state.justCreated) && (
+              <button
+                onClick={() => navigate(`/reply/${code}`)}
+                className="bg-rose-600 text-white w-full p-2.5 sm:p-3 md:p-3.5 rounded-lg sm:rounded-xl text-sm sm:text-base md:text-lg font-semibold shadow hover:bg-rose-700 transition-all"
+              >
+                💬 Responder mensaje
+              </button>
+            )}
 
             {/* MÚSICA */}
             <button

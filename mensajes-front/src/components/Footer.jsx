@@ -154,11 +154,11 @@ export default function Footer() {
               <span className="block sm:inline">Todos los derechos reservados</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span>Hecho con</span>
-              <span className="text-rose-500 animate-pulse">❤️</span>
-              <span>en Barcelona por</span>
+              <span>Made with</span>
+              <span className="text-rose-500 animate-pulse" style={{fontSize: '1.2em'}}>❤️</span>
+              <span>in Barcelona by</span>
               <a href="https://github.com/mihifidem" target="_blank" rel="noopener noreferrer" className="text-rose-400 hover:text-rose-300 font-medium transition-colors">
-                @mihifidem
+                mihifidem
               </a>
             </div>
           </div>
