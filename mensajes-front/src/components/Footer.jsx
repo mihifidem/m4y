@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import FaqSoporteDesplegable from "./FaqSoporteDesplegable";
 
 export default function Footer() {
   return (
@@ -24,16 +25,16 @@ export default function Footer() {
               </li>
            
               <li>
-                <a href="mailto:proveedores@weme.com" className="hover:text-rose-400 transition-colors flex items-center">
+                <Link to="/contacto-comercial" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">📧</span>
                   Contacto comercial
-                </a>
+                </Link>
               </li>
-               <li>
-                <a href="mailto:soporte@weme.com" className="hover:text-rose-400 transition-colors flex items-center">
+              <li>
+                <Link to="/contacto-soporte" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">💬</span>
                   Contacto soporte
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -46,22 +47,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/instrucciones/crear" className="hover:text-rose-400 transition-colors flex items-center">
+                <Link to="/que-ofrecemos" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">📝</span>
-                   Qué ofrecemos
+                  Qué ofrecemos
                 </Link>
               </li>
               <li>
-                <Link to="/instrucciones/ver" className="hover:text-rose-400 transition-colors flex items-center">
+                <Link to="/como-funciona" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">👁️</span>
                   Cómo funciona
                 </Link>
               </li>
               <li>
-                <a href="#ventajas" className="hover:text-rose-400 transition-colors flex items-center">
+                <Link to="/ventajas-nfc-qr" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">⭐</span>
                   Ventajas NFC/QR
-                </a>
+                </Link>
               </li>
          
             </ul>
@@ -75,24 +76,13 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#faq" className="hover:text-rose-400 transition-colors flex items-center">
+                <Link to="/preguntas-frecuentes" className="hover:text-rose-400 transition-colors flex items-center">
                   <span className="mr-2">❓</span>
                   Preguntas frecuentes
-                </a>
+                </Link>
               </li>
              
-              <li>
-                <a href="#privacidad" className="hover:text-rose-400 transition-colors flex items-center">
-                  <span className="mr-2">🔒</span>
-                  Política de privacidad
-                </a>
-              </li>
-              <li>
-                <a href="#terminos" className="hover:text-rose-400 transition-colors flex items-center">
-                  <span className="mr-2">📋</span>
-                  Términos de servicio
-                </a>
-              </li>
+              {/* Política de privacidad y Términos de servicio se moverán al final del footer */}
             </ul>
           </div>
 
@@ -161,6 +151,17 @@ export default function Footer() {
                 mihifidem
               </a>
             </div>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center text-xs sm:text-sm text-gray-400 mt-4 gap-2">
+            <Link to="/politica-privacidad" className="hover:text-rose-400 transition-colors flex items-center">
+              <span className="mr-2">🔒</span>
+              Política de privacidad
+            </Link>
+            <span className="hidden sm:inline mx-2">·</span>
+            <Link to="/terminos-servicio" className="hover:text-rose-400 transition-colors flex items-center">
+              <span className="mr-2">📋</span>
+              Términos de servicio
+            </Link>
           </div>
         </div>
       </div>

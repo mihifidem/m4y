@@ -20,6 +20,15 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import InstructionsCreate from "./pages/InstructionsCreate.jsx";
 import InstructionsView from "./pages/InstructionsView.jsx";
+import QueOfrecemos from "./pages/QueOfrecemos.jsx";
+import ComoFunciona from "./pages/ComoFunciona.jsx";
+import VentajasNFCQR from "./pages/VentajasNFCQR.jsx";
+import PreguntasFrecuentes from "./pages/PreguntasFrecuentes.jsx";
+import ContactoSoporte from "./pages/ContactoSoporte.jsx";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad.jsx";
+import TerminosServicio from "./pages/TerminosServicio.jsx";
+
+import ContactoComercial from "./pages/ContactoComercial.jsx";
 
 function App() {
   return (
@@ -28,6 +37,8 @@ function App() {
         <Navbar />
         <div className="flex-1 flex flex-col">
           <Routes>
+                        <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+                        <Route path="/terminos-servicio" element={<TerminosServicio />} />
             {/* Público */}
             <Route path="/" element={<Landing />} />
             <Route path="/home-info" element={<HomeInfo />} />
@@ -64,6 +75,13 @@ function App() {
             <Route path="/create-message/:code" element={<CreateMessage />} />
             <Route path="/instrucciones/crear" element={<InstructionsCreate />} />
             <Route path="/instrucciones/ver" element={<InstructionsView />} />
+            <Route path="/que-ofrecemos" element={<QueOfrecemos />} />
+            <Route path="/como-funciona" element={<ComoFunciona />} />
+            <Route path="/ventajas-nfc-qr" element={<VentajasNFCQR />} />
+            <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
+            <Route path="/contacto-soporte" element={<ContactoSoporte />} />
+            {/* Contacto comercial */}
+            <Route path="/contacto-comercial" element={<ContactoComercial />} />
             {/* Mensaje enviado */}
             <Route path="/message-sent/:code" element={<MessageSent />} />
             {/* Ver mensaje (destinatario) */}
